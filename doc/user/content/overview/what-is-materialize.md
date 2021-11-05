@@ -9,39 +9,47 @@ menu:
 
 Materialize is a streaming SQL materialized view engine.
 
-If that jargon-filled sentence doesn't answer all of your questions, we'll cover some important conceptual topics related to Materialize:
+If that jargon-filled sentence doesn't answer all of your questions, don't worry, we'll cover some of the basics here:
 
-- What it helps teams accomplish
-- What it actually is
-- How it works
+- [What does Materialize do?](#what-does-materialize-do)
+- [Why should I use Materialize?](#why-should-i-use-materialize)
+- [What Materialize helps teams accomplish](#materializes-design-objective)
+- [Understanding the jargon](#understanding-the-jargon)
+- [How Materialize works](#how-does-materialize-work)
+- [In comparison to other methodologies](#materialize-vs-other-methodologies)
 
 ## What does Materialize do?
 
-Materialize lets you ask questions about your data, and then get low-latency,
-correct answers, even as the underlying data changes.
+Materialize lets you ask questions about your data, and then get quick, correct answers, even as the underlying data
+changes.
 
-Why not just use your database's built-in functionality to perform these same
-computations? Because your database often acts as if it's never been asked that
-question before, which means it can take a _long_ time to come up with an
-answer, each and every time you pose the query.
+Why not just use your database's built-in functionality? Because your database will probably act as if it's never been
+asked that question before (even if it was). This means it can take a _long_ time to come up with an answer, each and
+every time you pose the query. So, answers for more complex questions might be correct only for a certain point in the
+past, already be outdated on arrival, and arriving late, leaving you with data that might be stale and incorrect.
 
-Materialize instead keeps the results of the queries and incrementally updates
-them as new data comes in. So, rather than recalculating the answer each time
-it's asked, Materialize continually updates the answer and gives you the
-answer's current state from memory.
+Materialize instead remembers the answers to the questions you pose and updates them as they change. Rather than
+recalculating the answer each time it's asked, Materialize continually watches the answer and gives you the answer's
+current state.
 
-Importantly, Materialize supports incrementally updating a much broader set of
-views than is common in traditional databases (e.g. views over multi-way joins
-with complex aggregations), and can do incremental updates in the presence of
-arbitrary inserts, updates, and deletes in the input streams.
+This way, Materialize provides real-time access to your data, which then can serve as a reliable building block for
+analytics, visualizations or other applications depending on current and valid data.
+
+Elegantly, Materialize tries to hide in plain sight by talking the same language as many databases: SQL. So, there's no
+big learning curve. Just attach Materialize to your existing database (you can try it using the Materialize Cloud!) and
+fire away with your questions.
+
+Materialize supports real-time data for a much broader range of complex queries than is common in both traditional databases
+and other current streaming database solutions, and can keep track of arbitrary changes in the input, imposing few constraints
+on queries while maintaining up-to-date results.
 
 ## Why should I use Materialize?
 
-If you perform any OLAP queries over relational data and want to reduce the time
-it takes to refresh answers to common queries, Materialize can make that happen.
+If you want to reduce the time it takes to refresh answers to common queries to your relational data, Materialize can
+make that happen.
 
-For a sense of scale, it can take queries that most teams would run once-per-day
-and instead provide sub-second or single-digit second answers.
+For a sense of scale, it can take queries that most teams would run once-per-day and instead provide sub-second or
+single-digit second answers, providing a whole swath of new opportunities of using your data.
 
 ## Materialize's design objective
 
